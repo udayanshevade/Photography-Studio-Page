@@ -69,10 +69,10 @@
   <main>
 
     <div class="slide-container" id="slide-container">
-      <div class="slide-control left">
+      <div class="slide-control left" id="left-control">
         <img src="img/left-arrow.svg" class="slide-arrow">
       </div>
-      <div class="slide-control right">
+      <div class="slide-control right" id="right-control">
         <img src="img/right-arrow.svg" class="slide-arrow">
       </div>
       <div class="placeholder"></div>
@@ -188,7 +188,28 @@
   <script type="text/template" id="slide-template">
     <div class="img-panel rear panel-<%= i %>" style="background-image: url(<%= image %>)"></div>
   </script>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-  <script async defer src="js/slideshow.js"></script>
+  <script src="js/utilities.js"></script>
+  <script src="js/slides.js"></script>
+  <script src="js/slideshow.js"></script>
+  <script src="js/slideshow-controller.js"></script>
+  <noscript id="deferred-styles">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  </noscript>
+  <script>
+    var loadDeferredStyles = function() {
+      var addStylesNode = document.getElementById("deferred-styles");
+      var replacement = document.createElement("div");
+      replacement.innerHTML = addStylesNode.textContent;
+      document.body.appendChild(replacement)
+      addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+        webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+    else window.addEventListener('load', loadDeferredStyles);
+  </script>
 </body>
 </html>
