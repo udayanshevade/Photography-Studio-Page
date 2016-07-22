@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>A Photography Studio</title>
+  <link href="css/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="header-name">
+      <a href="" class="header-link">
+        <h1 class="header-title">a photography studio</h1>
+      </a>
+    </div>
+    <div class="menubar">
+      <div class="explore-toggle">
+        <div class="explore-icon">
+          ☰
+        </div>
+        <div class="explore-label">explore</div>
+      </div>
+      <div class="connect-toggle">
+        <div class="connect-label">connect</div>
+        <div class="connect-icon">
+          +
+        </div>
+      </div>
+    </div>
+    <ul class="menu explore collapsed menu-overlay">
+      <li class="menu-item explore-item">
+        <a class="menu-link explore-link" href="">
+          wedding
+        </a>
+      </li>
+      <li class="menu-item explore-item">
+        <a class="menu-link explore-link" href="">
+          portrait
+        </a>
+      </li>
+      <li class="menu-item explore-item">
+        <a class="menu-link explore-link" href="">
+          landscape
+        </a>
+      </li>
+    </ul>
+
+    <ul class="connect collapsed menu-overlay">
+      <li class="menu-item connect-item">
+        <a class="menu-link connect-link" href="#contact">
+          contact
+        </a>
+      </li>
+      <li class="menu-item connect-item">
+        <a class="menu-link connect-link" href="">
+          blog
+        </a>
+      </li>
+      <li class="menu-item connect-item">
+        <a class="menu-link connect-link" href="#about">
+          about
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <main>
+
+    <div class="slide-container" id="slide-container">
+      <div class="slide-control left">
+        <img src="img/left-arrow.svg" class="slide-arrow">
+      </div>
+      <div class="slide-control right">
+        <img src="img/right-arrow.svg" class="slide-arrow">
+      </div>
+      <div class="placeholder"></div>
+    </div>
+
+    <hr class="rule">
+
+    <div id="about" class="about-container">
+      <div class="about-section">
+        <div class="about-title">
+          quam si explicavisset
+        </div>
+        <div class="about-who">
+          <p class="about-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eadem fortitudinis ratio reperietur. Verum hoc idem saepe faciamus. Sed quot homines, tot sententiae;
+          </p>
+          <p class="about-text">
+            Duo Reges: constructio interrete. Murenam te accusante defenderem. Iubet igitur nos Pythius Apollo noscere nosmet ipsos. Summum ením bonum exposuit vacuitatem doloris; Expectoque quid ad id, quod quaerebam, respondeas. Uterque enim summo bono fruitur, id est voluptate. Quo igitur, inquit, modo? Videamus animi partes, quarum est conspectus illustrior; Quae cum dixisset paulumque institisset, Quid est?
+          </p>
+          <p class="about-text">
+            Sint ista Graecorum; In schola desinis. Tibi hoc incredibile, quod beatissimum. Bonum valitudo: miser morbus.
+          </p>
+        </div>
+      </div>
+      <div class="about-section">
+        <div class="about-title">
+            peccata paria
+        </div>
+        <div class="about-what">
+          <p class="about-text">
+            Qui autem esse poteris, nisi te amor ipse ceperit? Cur tantas regiones barbarorum pedibus obiit, tot maria transmisit? Urgent tamen et nihil remittunt. Te enim iudicem aequum puto, modo quae dicat ille bene noris. Quod non faceret, si in voluptate summum bonum poneret. Refert tamen, quo modo. Non est igitur voluptas bonum.
+          </p>
+          <p class="about-text">
+            Si longus, levis. Hoc etsi multimodis reprehendi potest, tamen accipio, quod dant. Qui igitur convenit ab alia voluptate dicere naturam proficisci, in alia summum bonum ponere?
+          </p>
+          <p class="about-text">
+            Quae cum dixisset paulumque institisset, Quid est?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <div id="contact" class="contact-container">
+      <div class="contact-column form-column">
+        <div class="contact-intro">
+          how do we tell your story?
+        </div>
+        <form name="contactForm" class="contact-form">
+          <div class="name contact-section">
+            <div class="input-label name-label required">what is your name</div>
+            <div class="name-split">
+              <div class="name-entry">
+                <input type="text" class="input-field required-field name-field" required>
+                <div class="first-name sub-label">first</div>
+              </div>
+              <div class="name-entry">
+                <input type="text" class="input-field required-field name-field" required>
+                <div class="last-name sub-label">last</div>
+              </div>
+            </div>
+          </div>
+          <div class="partner contact-section">
+            <div class="input-label name-label">what is your partner's name</div>
+            <input type="text" class="input-field name-field">
+          </div>
+          <div class="email contact-section">
+            <div class="input-label email-label required">what is your email</div>
+            <input type="email" class="input-field required-field email-field" required>
+          </div>
+          <div class="subject contact-section">
+            <div class="input-label subject-label">subject</div>
+            <input type="text" class="input-field subject-field" required>
+          </div>
+          <div class="inquiry contact-section">
+            <div class="input-label inquiry-label required">comments or inquiry</div>
+            <textarea class="input-field inquiry-field" cols="35" rows="5" required></textarea>
+          </div>
+          <div class="subject contact-section">
+            <div class="input-label referral-label">how did you hear about us?</div>
+            <input type="text" class="input-field referral-field">
+          </div>
+          <div class="submit contact-section">
+            <input type="submit" class="submit-button" value="submit">
+          </div>
+        </form>
+      </div>
+
+      <div class="reach contact-column">
+        <div class="contact-intro">
+          contact us at
+        </div>
+        <div class="address contact-section">
+          Nunc omni virtuti vitium<br>
+          1355 Posthac quidem, Cn<br>
+          Graece
+        </div>
+        <div class="phone contact-section">
+          555-555-5555
+        </div>
+
+        <div class="contact-intro">
+          Ecce aliud simile dissimile!
+        </div>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+  </main>
+
+  <script type="text/template" id="slide-template">
+    <div class="img-panel rear panel-<%= i %>" style="background-image: url(<%= image %>)"></div>
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script async defer src="js/slideshow.js"></script>
+</body>
+</html>
