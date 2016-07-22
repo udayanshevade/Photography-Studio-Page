@@ -1,6 +1,6 @@
 var app = app || {};
 
-(function(window, app) {
+(function(global, app) {
 
   /* Utility functions - from You Might Not Need jQuery */
   function addClass(el, className) {
@@ -51,17 +51,6 @@ var app = app || {};
       'img/camping.jpg'
     ];
 
-    // Variables for tracking the slideshow state
-    this.props = {
-      currentImage: 0,
-      nextImage: 1,
-      nextAfterImage: 2,
-      prevImage: this.images.length - 1,
-      prevBeforeImage: this.images.length - 2,
-      i: 1,
-      fading: false,
-    };
-
   };
 
 
@@ -73,14 +62,32 @@ var app = app || {};
    */
   var Slideshow = function() {
 
+    var self = this;
+
+    // Variables for tracking the slideshow state
     this.init = function() {
+
+
       this.slideTemplate = _.template(document.getElementById('slide-template').innerHTML);
+
+      this.props = {
+        currentImage: 0,
+        nextImage: 1,
+        nextAfterImage: 2,
+        i: 1,
+        fading: false,
+        duration: 8000
+      };
 
       this.container = document.getElementById('slide-container');
     };
 
     // Create slide for each images
     this.createSlides = function(slides) {
+      // Set array.length dependent properties
+      this.props.prevImage = slides.length - 1;
+      this.props.prevBeforeImage = slides.length - 2;
+
       var data;
       for (var i = 0, len = slides.length; i < len; i++) {
         data = {
@@ -90,6 +97,7 @@ var app = app || {};
         // Create and display each slide
         this.createSlide(data);
       }
+      this.prepSlides();
     };
 
     // Create and insert the slideshow image
@@ -105,12 +113,27 @@ var app = app || {};
     this.prepSlides = function() {
       this.slides = document.getElementsByClassName('img-panel');
 
-      var first = this.slides[app.slideshowControl.currentImage()];
+      var first = this.slides[this.props.currentImage];
       addClass(first, 'front'); removeClass(first, 'rear');
-      var second = this.slides[app.slideshowControl.nextImage()];
+      var second = this.slides[this.props.nextImage];
       addClass(second, 'rear'); removeClass(second, 'front');
 
       this.startSlideshow();
+
+    };
+
+
+    // Kick off the slideshow
+    this.startSlideshow = function() {
+      global.setInterval(function() {
+        return self.playSlides();
+      }, this.props.duration);
+    };
+
+
+
+    // Loop through the slides
+    this.playSlides = function() {
 
     };
 
@@ -143,28 +166,6 @@ var app = app || {};
       var images = app.slides.images;
       app.slideshow.createSlides(images);
     };
-
-
-
-    /*
-     * Model property accessors
-     */
-    this.currentImage = function() {
-      return app.slides.props.currentImage;
-    }
-    this.nextImage = function() {
-      return app.slides.props.nextImage;
-    }
-    this.nextAfterImage = function() {
-      return app.slides.props.nextAfterImage;
-    }
-    this.prevImage = function() {
-      return app.slides.props.prevImage;
-    }
-    this.prevBeforeImage = function() {
-      return app.slides.props.prevBeforeImage;
-    }
-
 
 
     // Start the slideshow
