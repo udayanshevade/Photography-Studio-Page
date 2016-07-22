@@ -39,7 +39,20 @@ var app = app || {};
 
     this.container = document.getElementById('slide-container');
 
-    // Create and insert the slideshow images
+    // Create slide for each images
+    this.createSlides = function(slides) {
+      var data;
+      for (var i = 0, len = slides.length; i < len; i++) {
+        data = {
+          i: i,
+          image: slides[i]
+        };
+        // Create and display each slide
+        this.createSlide(data);
+      }
+    };
+
+    // Create and insert the slideshow image
     this.createSlide = function(slide) {
       var compiled = this.slideTemplate(slide);
       var temp = document.createElement('div');
@@ -68,15 +81,8 @@ var app = app || {};
     this.populate = function() {
       var data;
       var images = app.slides.images;
-      for (var i = 0, len = images.length; i < len; i++) {
-        data = {
-          i: i,
-          image: images[i]
-        };
-        // Create and display the slides
-        app.slideshow.createSlide(data);
-      }
-    }
+      app.slideshow.createSlides(images);
+    };
 
     // Start the slideshow
     this.init();
