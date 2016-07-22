@@ -71,12 +71,14 @@ var app = app || {};
       this.slideTemplate = _.template(document.getElementById('slide-template').innerHTML);
 
       this.props = {
-        currentImage: 0,
-        nextImage: 1,
-        nextAfterImage: 2,
+        indices: {
+          currentImage: 0,
+          nextImage: 1,
+          nextAfterImage: 2
+        },
         i: 1,
         fading: false,
-        duration: 8000
+        duration: 5000
       };
 
       this.container = document.getElementById('slide-container');
@@ -84,9 +86,12 @@ var app = app || {};
 
     // Create slide for each images
     this.createSlides = function(slides) {
+
+      this.images = slides;
+
       // Set array.length dependent properties
-      this.props.prevImage = slides.length - 1;
-      this.props.prevBeforeImage = slides.length - 2;
+      this.props.indices.prevImage = slides.length - 1;
+      this.props.indices.prevBeforeImage = slides.length - 2;
 
       var data;
       for (var i = 0, len = slides.length; i < len; i++) {
@@ -113,9 +118,9 @@ var app = app || {};
     this.prepSlides = function() {
       this.slides = document.getElementsByClassName('img-panel');
 
-      var first = this.slides[this.props.currentImage];
+      var first = this.slides[this.props.indices.currentImage];
       addClass(first, 'front'); removeClass(first, 'rear');
-      var second = this.slides[this.props.nextImage];
+      var second = this.slides[this.props.indices.nextImage];
       addClass(second, 'rear'); removeClass(second, 'front');
 
       this.startSlideshow();
@@ -134,7 +139,65 @@ var app = app || {};
 
     // Loop through the slides
     this.playSlides = function() {
+      var current = this.slides[this.props.indices.currentImage];
+      var next = this.slides[this.props.indices.nextImage];
+      addClass(next, 'back');
+        removeClass(next, 'front');
+          removeClass(next, 'rear');
+      var nextAfter = this.slides[this.props.indices.nextAfterImage];
+      addClass(nextAfter, 'rear');
+        removeClass(nextAfter, 'front')
+          removeClass(nextAfter, 'back');
 
+      this.props.fading = true;
+
+      // Animate current slide
+      addClass(current, 'fadeOut');
+
+      this.endSlide();
+
+    };
+
+    // Set 1s timeout to launch the change in slides
+    this.endSlide = function() {
+      global.setTimeout(function() {
+        self.props.fading = false;
+
+        for (var index in self.props.indices) {
+          if (self.props.indices.hasOwnProperty(index)) {
+            self.props.indices[index] += self.props.i;
+          }
+        }
+
+        // Change the current/next/previous indices
+        self.cycleIndices();
+
+        addClass(current, 'rear'); removeClass(current, 'front');
+        addClass(next, 'front'); removeClass(next, 'back');
+        addClass(nextAfter, 'back'); removeClass(nextAfter, 'rear');
+
+        // Stop animating the current slide
+        removeClass(current, 'fadeOut');
+
+      }, 1000);
+    };
+
+    this.cycleIndices = function() {
+      for (var index in this.props.indices) {
+        if (this.props.indices.hasOwnProperty(index)) {
+          this.cycleIndex(index);
+        }
+      }
+    };
+
+
+    this.cycleIndex = function(prop) {
+      if (this.props.indices[prop] >= this.images.length) {
+        this.props.indices[prop] = 0;
+      }
+      if (this.props.indices[prop] < 0) {
+        this.props.indices[prop] = this.images.length - 1;
+      }
     };
 
 
