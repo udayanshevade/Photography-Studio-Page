@@ -13,21 +13,21 @@ var app = app || {};
     var self = this;
 
     this.init = function() {
-
-      this.setDimensions();
-
-      this.header = document.getElementsByTagName('header');
+      this.header = document.getElementsByTagName('header')[0];
       this.menubar = document.getElementById('menubar');
       this.exploreIcon = document.getElementById('explore-icon');
       this.connectIcon = document.getElementById('connect-icon');
       this.exploreLabel = document.getElementById('explore-label');
       this.connectLabel = document.getElementById('connect-label');
+      this.exploreToggle = document.getElementById('explore-toggle');
+      this.connectToggle = document.getElementById('connect-toggle');
       this.explore = document.getElementById('explore');
       this.connect = document.getElementById('connect');
 
       this.exploring = false;
       this.connecting = false;
 
+      this.setDimensions();
       this.addListeners();
 
       global.setTimeout(function() {
@@ -43,6 +43,7 @@ var app = app || {};
     this.setDimensions = function() {
       this.screenWidth = document.body.clientWidth;
       this.screenHeight = document.body.clientHeight;
+      this.reflowMenu();
     };
 
 
@@ -97,6 +98,55 @@ var app = app || {};
           utils.addClass(this.explore, 'collapsed');
       }
       utils.toggleClass(this.connect, 'collapsed');
+    }
+  };
+
+
+  this.reflowMenu = function() {
+    if (this.screenWidth < 500) {
+      this.header.appendChild(this.explore);
+      utils.addClass(this.explore, 'menu-overlay');
+
+      if (this.lastWidth >= 500) {
+        utils.addClass(this.explore, 'collapsed');
+      }
+      this.lastWidth = this.screenWidth;
+    }
+    if (this.screenWidth >= 500) {
+      this.exploreToggle.appendChild(this.explore);
+      utils.removeClass(this.explore, 'collapsed');
+      utils.removeClass(this.explore, 'menu-overlay');
+      this.lastWidth = this.screenWidth;
+    }
+    if (this.screenWidth < 750) {
+      this.splitMenus();
+      utils.addClass(this.connect, 'collapsed');
+      utils.addClass(this.connect, 'menu-overlay');
+      utils.removeClass(this.connectIcon, 'connect-icon-active');
+      utils.removeClass(this.connectLabel, 'connect-label-active');
+    }
+    if (this.screenWidth >= 750) {
+      this.mergeMenus();
+      utils.removeClass(this.connect, 'collapsed');
+      utils.removeClass(this.connect, 'menu-overlay');
+      this.lastWidth = this.screenWidth;
+    }
+    if (this.screenWidth < 1200) {
+      utils.removeClass(this.header, 'collapsed');
+    }
+  };
+
+  this.mergeMenus = function() {
+    var items = document.getElementsByClassName('connect-item');
+    for (var i = 0; i < items.length; i++) {
+      this.explore.appendChild(items[i]);
+    }
+  }
+
+  this.splitMenus = function() {
+    var items = document.getElementsByClassName('connect-item');
+    for (var i = 0; i < items.length; i++) {
+      this.connect.appendChild(items[i]);
     }
   };
 

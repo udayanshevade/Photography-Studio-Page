@@ -33,6 +33,7 @@ header {
   width: 100%;
   z-index: 5;
   padding-left: 0.5rem;
+  position: relative;
 }
 
 .header-link {
@@ -134,7 +135,6 @@ header {
 .menu-overlay {
   position: absolute;
   width: 100%;
-  z-index: 1;
   transform: translateY(-1rem);
   transition: transform ease-out 0.5s;
 }

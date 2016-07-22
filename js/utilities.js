@@ -9,7 +9,6 @@ var app = app || {};
    * --------------------------------------------------
    */
   app.utilities.hasClass = function(el, className) {
-    console.log(el, className);
     if (el.classList) {
       el.classList.contains(className);
     } else {
@@ -17,7 +16,6 @@ var app = app || {};
     }
   };
   app.utilities.addClass = function(el, className) {
-    console.log(el, className);
     if (el.classList) {
       el.classList.add(className);
     } else {
@@ -25,7 +23,6 @@ var app = app || {};
     }
   };
   app.utilities.removeClass = function(el, className) {
-    console.log(el, className);
     if (el.classList) {
       el.classList.remove(className);
     } else {
@@ -33,7 +30,6 @@ var app = app || {};
     }
   };
   app.utilities.toggleClass = function(el, className) {
-    console.log(el, className);
     if (el.classList) {
       el.classList.toggle(className);
     } else {
