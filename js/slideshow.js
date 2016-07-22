@@ -25,7 +25,9 @@ var app = app || {};
         },
         i: 1,
         fading: false,
-        duration: 8000
+        duration: 8000,
+        loaded: 0,
+        loading: true
       };
 
       this.container = document.getElementById('slide-container');
@@ -74,18 +76,40 @@ var app = app || {};
         // Create and display each slide
         this.createSlide(data);
       }
-      this.prepSlides();
     };
 
 
 
     // Create and insert the slideshow image
     this.createSlide = function(slide) {
-      var compiled = this.slideTemplate(slide);
-      var temp = document.createElement('div');
-      temp.innerHTML = compiled;
-      var el = temp.childNodes[1];
-      this.container.insertBefore(el, this.container.firstChild);
+      var preloadImage = new Image();
+      preloadImage.onload = function() {
+        var compiled = self.slideTemplate(slide);
+        var temp = document.createElement('div');
+        temp.innerHTML = compiled;
+        var el = temp.childNodes[1];
+        self.container.insertBefore(el, self.container.firstChild);
+        self.props.loaded++;
+        self.checkReady();
+      };
+      preloadImage.src = slide.image;
+    };
+
+
+
+    this.checkReady = function() {
+      console.log(this.props.loaded);
+      if (this.props.loaded === this.images.length) {
+        this.props.loaded = true;
+      }
+      if (this.props.loaded === true) {
+        this.props.loading = false;
+        this.prepSlides();
+        var loader = document.getElementById('loader-spinner');
+        global.setTimeout(function() {
+          loader.style = "display: none";
+        }, 500);
+      }
     };
 
 

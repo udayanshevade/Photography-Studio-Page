@@ -21,6 +21,33 @@ body {
   font: 62.5% 'Alegreya Sans SC', sans-serif;
 }
 
+.loader {
+  background-color: rgba(255,255,255,0.3);
+  z-index: 10;
+  margin: 0 0 2em;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.loader-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+}
+
+svg path,
+svg rect{
+  fill: #212121;
+}
+
 /* Header */
 
 header {
