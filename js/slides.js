@@ -12,8 +12,11 @@ var app = app || {};
     this.images = [
       'img/field.jpg',
       'img/cliffs.jpg',
+      'img/bride.jpg',
       'img/waterfall.jpg',
-      'img/camping.jpg'
+      'img/camping.jpg',
+      'img/newlyweds.jpg',
+      'img/shore.jpg'
     ];
 
   };
