@@ -15,21 +15,21 @@
         <h1 class="header-title">a photography studio</h1>
       </a>
     </div>
-    <div class="menubar">
-      <div class="explore-toggle">
-        <div class="explore-icon">
+    <div class="menubar" id="menubar">
+      <div class="toggle explore-toggle" id="explore-toggle">
+        <div class="explore-icon" id="explore-icon">
           ☰
         </div>
-        <div class="explore-label">explore</div>
+        <div class="explore-label" id="explore-label">explore</div>
       </div>
-      <div class="connect-toggle">
-        <div class="connect-label">connect</div>
-        <div class="connect-icon">
+      <div class="toggle connect-toggle" id="connect-toggle">
+        <div class="connect-label" id="connect-label">connect</div>
+        <div class="connect-icon" id="connect-icon">
           +
         </div>
       </div>
     </div>
-    <ul class="menu explore collapsed menu-overlay">
+    <ul class="menu explore collapsed menu-overlay" id="explore">
       <li class="menu-item explore-item">
         <a class="menu-link explore-link" href="">
           wedding
@@ -47,7 +47,7 @@
       </li>
     </ul>
 
-    <ul class="connect collapsed menu-overlay">
+    <ul class="connect collapsed menu-overlay" id="connect">
       <li class="menu-item connect-item">
         <a class="menu-link connect-link" href="#contact">
           contact
@@ -192,6 +192,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="js/utilities.js"></script>
+  <script src="js/menu.js"></script>
   <script src="js/slides.js"></script>
   <script src="js/slideshow.js"></script>
   <script src="js/slideshow-controller.js"></script>

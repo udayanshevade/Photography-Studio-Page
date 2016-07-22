@@ -52,14 +52,14 @@ header {
   display: flex;
 }
 
-.explore-toggle,
-.connect-toggle {
+.toggle {
   border: 1px solid #f9f9f9;
   width: 50%;
   position: relative;
   display: flex;
   background-color: #fff;
   z-index: 5;
+  overflow: hidden;
 }
 
 .connect-toggle {
@@ -100,22 +100,22 @@ header {
   margin-right: 0.45rem;
   font-size: 2rem;
   color: #cc9900;
-  transition: transform ease-in-out 0.5s, color 0.3s;
-  -webkit-transition: transform ease-in-out 0.5s, color 0.3s;
-  -moz-transition: transform ease-in-out 0.5s, color 0.3s;
-  -ms-transition: transform ease-in-out 0.5s, color 0.3s;
-  -o-transition: transform ease-in-out 0.5s, color 0.3s;
+  transition: transform ease-in-out 0.25s, color 0.15s;
+  -webkit-transition: transform ease-in-out 0.25s, color 0.15s;
+  -moz-transition: transform ease-in-out 0.25s, color 0.15s;
+  -ms-transition: transform ease-in-out 0.25s, color 0.15s;
+  -o-transition: transform ease-in-out 0.25s, color 0.15s;
 }
 
 .explore-icon {
   margin-left: 0.45rem;
   font-size: 1.5rem;
   color: #333;
-  transition: color 0.3s;
-  -webkit-transition: color 0.3s;
-  -moz-transition: color 0.3s;
-  -ms-transition: color 0.3s;
-  -o-transition: color 0.3s;
+  transition: color 0.15s;
+  -webkit-transition: color 0.15s;
+  -moz-transition: color 0.15s;
+  -ms-transition: color 0.15s;
+  -o-transition: color 0.15s;
 }
 
 .connect-icon-active,
@@ -136,7 +136,7 @@ header {
   width: 100%;
   z-index: 1;
   transform: translateY(-1rem);
-  transition: transform ease-out 1s;
+  transition: transform ease-out 0.5s;
 }
 
 .collapsed {
