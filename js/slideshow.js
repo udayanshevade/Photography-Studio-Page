@@ -154,12 +154,12 @@ var app = app || {};
       // Animate current slide
       addClass(current, 'fadeOut');
 
-      this.endSlide();
+      this.endSlide(current, next, nextAfter);
 
     };
 
     // Set 1s timeout to launch the change in slides
-    this.endSlide = function() {
+    this.endSlide = function(current, next, nextAfter) {
       global.setTimeout(function() {
         self.props.fading = false;
 
