@@ -3,21 +3,21 @@ var app = app || {};
 (function(window, app) {
 
   /* Utility functions - from You Might Not Need jQuery */
-  function addClass() {
+  function addClass(el, className) {
     if (el.classList) {
       el.classList.add(className);
     } else {
       el.className += ' ' + className;
     }
   }
-  function removeClass() {
+  function removeClass(el, className) {
     if (el.classList) {
       el.classList.remove(className);
     } else {
       el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
     }
   }
-  function toggleClass() {
+  function toggleClass(el, className) {
     if (el.classList) {
       el.classList.toggle(className);
     } else {
@@ -33,6 +33,10 @@ var app = app || {};
       el.className = classes.join(' ');
     }
   }
+
+
+
+
 
   /*
    * Model
@@ -62,14 +66,18 @@ var app = app || {};
 
 
 
+
+
   /*
    * View
    */
   var Slideshow = function() {
 
-    this.slideTemplate = _.template(document.getElementById('slide-template').innerHTML);
+    this.init = function() {
+      this.slideTemplate = _.template(document.getElementById('slide-template').innerHTML);
 
-    this.container = document.getElementById('slide-container');
+      this.container = document.getElementById('slide-container');
+    };
 
     // Create slide for each images
     this.createSlides = function(slides) {
@@ -93,7 +101,25 @@ var app = app || {};
       this.container.insertBefore(el, this.container.firstChild);
     };
 
+    // Prepare initial slides
+    this.prepSlides = function() {
+      this.slides = document.getElementsByClassName('img-panel');
+
+      var first = this.slides[app.slideshowControl.currentImage()];
+      addClass(first, 'front'); removeClass(first, 'rear');
+      var second = this.slides[app.slideshowControl.nextImage()];
+      addClass(second, 'rear'); removeClass(second, 'front');
+
+      this.startSlideshow();
+
+    };
+
+
+    this.init();
+
   };
+
+
 
 
 
@@ -109,12 +135,37 @@ var app = app || {};
       this.populate();
     };
 
+
+
     // Populate the slides
     this.populate = function() {
       var data;
       var images = app.slides.images;
       app.slideshow.createSlides(images);
     };
+
+
+
+    /*
+     * Model property accessors
+     */
+    this.currentImage = function() {
+      return app.slides.props.currentImage;
+    }
+    this.nextImage = function() {
+      return app.slides.props.nextImage;
+    }
+    this.nextAfterImage = function() {
+      return app.slides.props.nextAfterImage;
+    }
+    this.prevImage = function() {
+      return app.slides.props.prevImage;
+    }
+    this.prevBeforeImage = function() {
+      return app.slides.props.prevBeforeImage;
+    }
+
+
 
     // Start the slideshow
     this.init();
