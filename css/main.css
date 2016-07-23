@@ -53,10 +53,10 @@ svg rect{
 header {
   transition: top 1s ease-in-out;
   border-bottom: 1px #f1f1f1 solid;
+  background-color: #fff;
 }
 
 .header-name {
-  background-color: #fff;
   width: 100%;
   z-index: 5;
   padding-left: 0.5rem;
@@ -85,7 +85,6 @@ header {
   width: 50%;
   position: relative;
   display: flex;
-  background-color: #fff;
   z-index: 5;
   overflow: hidden;
 }
@@ -176,7 +175,6 @@ header {
 
 .connect,
 .explore {
-  background-color: #fff;
   list-style: none;
   padding-left: 0;
   left: 0;
@@ -189,10 +187,6 @@ header {
   font-size: 1.15rem;
   letter-spacing: 0.05rem;
   border: 1px #fafafa solid;
-}
-
-.menu-item:hover {
-  background-color: #fafafa;
 }
 
 .menu-link {
@@ -465,9 +459,6 @@ header {
     padding: 0;
     border: none;
   }
-  .explore-item:hover {
-    background-color: #fff;
-  }
   .explore-link {
     padding: 0;
   }
@@ -512,9 +503,6 @@ header {
     display: inline;
     padding: 0;
     border: none;
-  }
-  .connect-item:hover {
-    background-color: #fff;
   }
   .menu-link {
     padding: 0;

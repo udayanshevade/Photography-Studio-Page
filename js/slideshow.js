@@ -98,7 +98,6 @@ var app = app || {};
 
 
     this.checkReady = function() {
-      console.log(this.props.loaded);
       if (this.props.loaded === this.images.length) {
         this.props.loaded = true;
       }

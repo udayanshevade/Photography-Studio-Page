@@ -13,17 +13,7 @@ var app = app || {};
     var self = this;
 
     this.init = function() {
-      this.header = document.getElementsByTagName('header')[0];
-      this.menubar = document.getElementById('menubar');
-      this.exploreIcon = document.getElementById('explore-icon');
-      this.connectIcon = document.getElementById('connect-icon');
-      this.exploreLabel = document.getElementById('explore-label');
-      this.connectLabel = document.getElementById('connect-label');
-      this.exploreToggle = document.getElementById('explore-toggle');
-      this.connectToggle = document.getElementById('connect-toggle');
-      this.explore = document.getElementById('explore');
-      this.connect = document.getElementById('connect');
-
+      this.queryElements();
       this.exploring = false;
       this.connecting = false;
 
@@ -36,6 +26,35 @@ var app = app || {};
           self.clickExplore();
         }
       }, 8500);
+
+      this.initScroll();
+    };
+
+
+
+    this.queryElements = function() {
+      this.header = document.getElementsByTagName('header')[0];
+      this.menubar = document.getElementById('menubar');
+      this.exploreIcon = document.getElementById('explore-icon');
+      this.connectIcon = document.getElementById('connect-icon');
+      this.exploreLabel = document.getElementById('explore-label');
+      this.connectLabel = document.getElementById('connect-label');
+      this.exploreToggle = document.getElementById('explore-toggle');
+      this.connectToggle = document.getElementById('connect-toggle');
+      this.explore = document.getElementById('explore');
+      this.connect = document.getElementById('connect');
+    };
+
+
+
+    this.initScroll = function() {
+      // vars for hasScrolled() - header retract function
+      this.lastScrollTop = 0;
+      this.delta = 5;
+      this.navbarHeight = this.header.offsetHeight;
+      this.hovering = false;
+      this.st = 0;
+      this.didScroll = false;
     };
 
 
@@ -49,7 +68,7 @@ var app = app || {};
 
 
     this.addListeners = function() {
-      window.addEventListener('resize', self.setDimensions.bind(self));
+      global.addEventListener('resize', self.setDimensions.bind(self));
       // clicking the menu icon (contact, blog)
       var toExplore = [this.exploreIcon, this.exploreLabel];
       for (var e = 0; e < toExplore.length; e++) {
@@ -60,6 +79,36 @@ var app = app || {};
       for (var c = 0; c < toConnect.length; c++) {
         toConnect[c].addEventListener('click', self.clickConnect.bind(self));
       }
+
+      global.addEventListener('scroll', self.scroll.bind(self));
+    };
+
+
+
+    this.scroll = function() {
+      global.requestAnimationFrame(self.hasScrolled.bind(self));
+    };
+
+
+
+    this.hasScrolled = function() {
+      this.st = (global.pageYOffset !== undefined) ? global.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+
+      if (Math.abs(this.lastScrollTop - this.st) <= this.delta){
+        return;
+      }
+      if (this.st > this.lastScrollTop && this.st > this.navbarHeight) {
+        //scroll down
+        utils.addClass(this.header, 'header-collapse');
+      }
+      else {
+      //scroll up
+        if (this.st + global.innerHeight < this.screenHeight) {
+          utils.removeClass(this.header, 'header-collapse');
+
+        }
+      }
+      this.lastScrollTop = this.st;
     };
 
 
